@@ -1,0 +1,30 @@
+.ant-btn {
+  border: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.645, 0.45, 0.355, 1);
+  color: rgba(0, 0, 0, 0.015);
+  background-color: #fff;
+  border-color: #d9d9d9;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+}
+
+.ant-btn:not([disabled]):active {
+  outline: none;
+  box-shadow: none;
+}
+.ant-btn:hover,
+.ant-btn:focus,
+.ant-btn:active {
+  background: #fff;
+  text-decoration: none;
+}
+
+.ant-btn:hover,
+.ant-btn:focus {
+  color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.ant-btn:active {
+  color: #096dd9;
+  border-color: #096dd9;
+}
