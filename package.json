@@ -19,8 +19,18 @@
   "bugs": {
     "url": "https://github.com/Archsx/VueComponents/issues"
   },
+  "alias": {
+    "vue" : "./node_modules/vue/dist/vue.common.js"
+  },
   "homepage": "https://github.com/Archsx/VueComponents#readme",
   "dependencies": {
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-hot-reload-api": "^2.3.3"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.0.0",
+    "less": "^3.9.0",
+    "parcel-bundler": "^1.12.3",
+    "vue-template-compiler": "^2.6.10"
   }
 }
