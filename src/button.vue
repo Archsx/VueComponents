@@ -1,10 +1,27 @@
 <template>
-  <button class="g-button">按钮</button>
+  <button class="g-button" :class="iconPosition">
+  <!-- <button class="g-button" :class="{right:iconPosition}"> -->
+    <svg v-if="icon"  class="icon" :class="test">
+      <use :xlink:href="`#i-${icon}`"></use>
+    </svg>
+    <slot></slot>
+  </button>
 </template>
 
 <script>
 export default {
-  name: ""
+  name: "",
+  props:{
+    icon:String,
+    iconPosition:{
+      type:String,
+      // default:'left'
+    },
+    test:{
+      type:Array,
+      default:[]
+    }
+  }
 };
 </script>
 
