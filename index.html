@@ -22,13 +22,6 @@
         --border-color: #999;
         --border-color-hover: #666;
       }
-      .icon {
-        width: 1em;
-        height: 1em;
-        vertical-align: -0.15em;
-        fill: currentColor;
-        overflow: hidden;
-      }
       #app {
         margin: 20px;
       }
@@ -41,18 +34,28 @@
   </head>
   <body>
     <div id="app">
-      <g-button>
+      <g-button :loading="loading1" @click="loading1 = !loading1">
         设置
       </g-button>
-      <g-button icon="settings">
+      <g-button icon="settings" :loading="true">
         设置
       </g-button>
-      <g-button icon="settings" icon-position="right" class="hhhh" :test="['foo','bar']">
+      <g-button icon="settings" icon-position="right">
         设置
       </g-button>
+
+      <g-button-group>
+        <g-button icon="arrow-left">上一页</g-button>
+        <g-button >更多</g-button>
+        <g-button icon="arrow-right" icon-position="right">下一页</g-button>
+
+
+      </g-button-group>
+
+
     </div>
 
     <script src="./src/app.js"></script>
-    <script src="//at.alicdn.com/t/font_1340364_zqdkbqr672n.js"></script>
+    <script src="//at.alicdn.com/t/font_1340364_1c156kl41v5.js"></script>
   </body>
 </html>
