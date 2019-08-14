@@ -150,3 +150,44 @@
 1> 穷举这些情况，用v-if控制。缺点是重复代码太多
 
 2> 用css实现！flex布局里面可以设置order!，用class来设置不同的order
+
+
+#### 关于css动画
+
+感觉很久没接触了，但是其实就是用@keyframe定义，然后在某个类上使用
+```
+@keyframes slidein {
+  from{
+    margin-left:100%;
+    width:300%
+  }
+  to{
+    margin-left:0%;
+    width:100%
+  }
+}
+
+
+.someClass{
+  animation:slidein 4s linear 
+}
+
+
+```
+
+#### 关于props的检测
+
+可以使用validator这个属性对传入的props进行校验
+
+#### 关于封装
+
+对于icon封装为icon.vue，然后在button.vue里面引用icon.vue
+
+#### 关于loading效果的思考
+
+刚开始的时候，对于这个完全没有想法，不知道怎么做。企图把一切东西封装在button内部，意思就是组件的使用者只需要定义点击事件，然后button组件自动就会触发，可是这样的话有一个问题，就是只有组件的使用者才知道这个loading状态什么时候结束，所以这个想法是不现实的。所以改为由组件的使用者传入一个prop状态值(比如loading)来控制是否显示此状态.
+
+#### 关于多个div边框重叠的问题
+
+和ant design 里面的vue组件一样，也是采用了margin-left为-1px的解决办法，需要注意的是那些Css选择器,有点复杂
+
