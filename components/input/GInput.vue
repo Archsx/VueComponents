@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper" :class="{error:error}">
-    <input :value="value" type="text" class="gulu-input" :disabled="disabled" :readonly="readonly">
+    <input :value="value" type="text" class="gulu-input" :disabled="disabled" :readonly="readonly"
+      @change="handleChange"
+      @input="handleInput"
+      @focus="hanldeFocus"
+      @blur="handleBlur"
+    >
     <template v-if="error">
       <g-icon name="error" class="errorIcon"></g-icon>
       <span class="errorMessage">{{error}}</span>
@@ -36,7 +41,21 @@ export default {
       type: Boolean,
       default: false
     }
-  }
+  },
+  methods: {
+    handleChange(e){
+      this.$emit('change',e.target.value)
+    },
+    handleInput(){
+      this.$emit('input',e.target.value)
+    },
+    handleBlur(){
+      this.$emit('blur',e.target.value)
+    },
+    handleFocus(){
+      this.$emit('focus',e.target.value)
+    }
+  },
 };
 </script>
 
