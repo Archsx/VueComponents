@@ -114,6 +114,129 @@
 ```
 我也不知道为什么，VSCode有时候对less里面的高版本才有的less语法会报错。害我浪费了一些时间
 
+##### 关于绑定class时为数组
+
+都知道绑定dom上的多个class的时候可以使用数组的形式
+
+```
+  <dom :class="['foo','bar']">
+
+  </dom>
+
+  //可是假如比较复杂
+
+  // 假如这些prop没写默认值，外部也没传入，那将会出现class="col-undefined span-undefined" 严重影响美观
+  <dom :class="['col-'+someprop,'span-'+ someprop]">
+  </dom>
+
+  解决办法
+
+  <dom :class="[someprop && 'col-' + someprop ]"></dom>
+
+```
+
+##### 关于中间出现间隔
+
+```
+  <div class="wrapper">
+    <div></div>
+    <div></div>
+  </div>
+
+  如何让里面的两个div中间产生20px空白间距?
+
+  也许你想用flex以及css的calc
+
+  .wrapper{
+    display:flex;
+    justify-content:space-around
+  }
+
+  .wrapper > div {
+    width:calc(100% - 10px)
+  }
+
+  应该没什么问题，但是，这只是两个div，万一有三个，四个，五个。。。那么calc就要重写
+
+  解决办法，使用padding以及负margin 
+
+  .wrapper{
+    margin:0 -10px //-10怎么来的？需要的间隔/2 再变成负数即可
+  }
+
+  .wrapper > div{
+    padding:0 10px // 同上
+  } 
+
+  万一这些div上面有背景色，这样看不出效果怎么办?
+
+  .wreapper > div{
+    background-color:grey;
+    background-clip:content-box //这句设置background不包括padding
+  }
+
+
+
+
+
+```
+
+
+
+##### 关于空数组
+
+这种问题，不容小视.因为这种问题常常会带来不必要的困惑
+
+```
+  var a = []
+
+
+  console.log(a) // 此时显示[],但是又可以点进去发现里面是有内容的
+
+
+  a.push(1)
+
+
+
+  // 这样类似的困惑还包括之前在segmentfault以及掘金等文章常见的vue生命周期console的困惑
+
+
+  //原音很简单，就是一个时间问题，打印的时候是空数组，但是后来不是。
+
+  // 后来遇到这样的困惑我都是console.log(JSON.stringify(sth))
+
+
+```
+
+
+
+##### 关于created和mounted的区别       
+
+以前我只知道,created只是初始化完成，但是选取不到DOM,而mounted表示元素已经挂载到页面上
+
+这里有个简单的类比
+
+```
+  var div = document.createElement('div') // created 只是在内存中生成dom对象，还未挂载到页面上
+
+  var childDiv = document.createElement('div') //child created
+
+  div.appendChild(childDiv) //child mounted
+
+
+  document.body.appendChild(div) // mounted 已经把dom挂载到页面上
+
+
+
+```
+
+##### 关于$children
+
+根据Vue文档，vm.$children 表示当前实例的直接子组件(slot插上去的也算，比如Row.vue配合使用Col.vue,在Row里面可以使用这个获取到插在上面的Col.vue),类型为Array<Vue instance>,看见了吗，是一个数组.比之前坑人的somedom.children要好用多了吧
+
+> 当前实例的直接子组件。需要注意 $children 并不保证顺序，也不是响应式的。如果你发现自己正在尝试使用 $children 来进行数据绑定，考虑使用一个数组配合 v-for 来生成子组件，并且使用 Array 作为真正的来源。
+
+
 
 
 
