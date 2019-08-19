@@ -1,28 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-    *{
-      margin:0;
-      padding: 0;
-      box-sizing: border-box
-    }
-  </style>
-</head>
-<body>
-  <div id="app">
-    <div>
-      <g-row gutter="20">
-        <g-col span="20"></g-col>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <div>
+        <g-row gutter="20">
+          <g-col span="20"></g-col>
+          <g-col span="4"></g-col>
+        </g-row>
+      </div> -->
+
+      <g-row class="topbar">
+        <g-col span="9"> 
+          <g-row align="left">
+            <g-col>1</g-col>
+            <g-col>2</g-col>
+            <g-col>3</g-col>
+            <g-col>4</g-col>
+          </g-row>
+        </g-col>
+        <g-col span="15">
+          <g-row align="right">
+            <g-col>1</g-col>
+            <g-col>2</g-col>
+            <g-col>3</g-col>
+            <g-col>4</g-col>
+            <g-col>5</g-col>
+            <g-col>6</g-col>
+            <g-col>7</g-col>
+          </g-row>
+          
+        </g-col>
+      </g-row>
+      <g-row class="logo-and-search-and-qrcode">
         <g-col span="4"></g-col>
+        <g-col span="14"></g-col>
+        <g-col span="6"></g-col>
       </g-row>
     </div>
-  </div>
-  <script src="./app.js">
-  </script>
-</body>
+    <script src="./app.js"></script>
+  </body>
 </html>

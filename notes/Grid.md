@@ -236,12 +236,132 @@
 
 > 当前实例的直接子组件。需要注意 $children 并不保证顺序，也不是响应式的。如果你发现自己正在尝试使用 $children 来进行数据绑定，考虑使用一个数组配合 v-for 来生成子组件，并且使用 Array 作为真正的来源。
 
+##### 关于JS和CSS
+
+有时候，我在想，能不能在CSS中动态的引用JS的变量，这样就可以用js动态的去生成css，但是目前好像是不行的(就我所认知的范围)
+
+可以做类似的效果，比如在css中穷举不同的class对应不同的css,然后在dom中通过动态绑定class的方式，通过设置不同的class，以设置不同的样式
+
+```
+  <dom :class="sth">
+
+  </dom>
+  
+  // sth 可以为'foo','bar','baz'
+
+  //css部分
+
+  dom.foo{
+    //
+  }
+  dom.bar{
+    //
+  }
+  dom.baz{
+    //
+  }
+
+```
+
+可以动态绑定:style="sth"，这样可以动态设置margin,padding等更具体的值，这里就不再展开描述了
 
 
 
+##### 关于computed和data
+
+首先要附上我在stackoverflow上面提的问题，外国的老哥回答得挺不错的
+
+https://stackoverflow.com/questions/57557941/why-vue-js-computed-get-undefined
+
+
+这个问题的来源是在写Col.vue的时候，computed和data有点混淆不清楚,造成了本来应该用computed的地方却没有用
+
+首先要看看这个问题，我觉得真的要写的东西很多啊
+
+首先要说的是computed里面定义的计算属性里面有个console.log('computed'),和印象中不同，上面问题中，从来没有打印过'computed'
+
+原因是（引用答案里面的一段话）
+
+>computed properties are computed lazily so unless something asks for calcWidth it won't be evaluated. – skirtle 
+
+至于什么才能触发这个lazy计算呢?可能是dom中需要显示吧，比如{{calcWidth}} ,也有可能是间接的，比如另一个computed属性中(比如foo)使用了calcWidth,但是这样还不行，这个foo必须在dom被需要显示才行,比如{{foo}}.个人观点，可能有遗漏 
+
+代码参考 https://gist.github.com/Archsx/66810568e73709df6c2c9fd37c4760b9
+
+
+再说说老生常谈的js里面的基础类型和引用类型吧，来看看下面的例子:
+
+```
+  <div id="app">
+    {{name}}
+  </div>
+
+  //script
+  var obj = {
+    foo:'bar'    
+  }
+  new Vue({
+    el:'#app',
+    data:{
+      name:obj.foo
+    }
+  })
+
+  setTimeout(()=>{
+    obj.foo = 'baz'
+  },2000)
+
+
+  // 基础类型
+  // 上面的代码， 两秒之后，dom并不会更新，还是'baz'
+
+
+  // 然后我们换一种写法
+  
+  <div id="app">
+    {{name.foo}}
+  </div>
+
+  //script
+
+  var obj = {
+    foo:'bar'
+  }
+
+
+  new Vue({
+    el:'#app',
+    data:{
+      name:obj
+    }
+  })
+
+  setTimeout(()=>{
+    obj.foo = 'baz'
+  },2000)
+
+  // 引用类型
+  // 上面的写法，两秒之后，'bar'变成'baz'
+
+
+  上述两种写法的差别，自己体会
 
 
 
+```
+
+还有一个big mistake!我为什么会蠢到写
+
+```
+  data(){
+    return {
+      someData:this.someComputedData // 这里的data需要写成函数的形式，不然this的指向可能有问题，详见原问题
+    }
+  }
+
+```
+
+这难道不是多此一举吗？直接使用computed属性不就好了?参考Col.vue即可
 
 
 
