@@ -14,20 +14,28 @@ export default {
     offset: {
       type: [Number, String]
     },
-    xl: {
-      type: [Number, String]
-    },
-    lg: {
-      type: [Number, String]
-    },
-    md: {
-      type: [Number, String]
-    },
-    sm: {
-      type: [Number, String]
-    },
-    xs: {
-      type: [Number, String]
+    // xl: {
+    //   type: [Number, String]
+    // },
+    // lg: {
+    //   type: [Number, String]
+    // },
+    // md: {
+    //   type: [Number, String]
+    // },
+    // sm: {
+    //   type: [Number, String]
+    // },
+    // xs: {
+    //   type: [Number, String]
+    // }
+    phone: {
+      type: Object,
+      validator(value) {
+        return Object.keys(value).every(ele => {
+          return ["span", "offset"].includes(ele);
+        });
+      }
     }
   },
   data() {
@@ -53,7 +61,15 @@ export default {
     },
     colClasses() {
       let { span, offset, xl, lg, md, sm, xs } = this;
-      return [span && `col-${span}`, offset && `offset-${offset}`,xl && `col-xl-${xl}`,lg && `col-lg-${lg}`,md && `col-md-${md}`,sm && `col-sm-${sm}`,xs && `col-xs-${xs}`];
+      return [
+        span && `col-${span}`,
+        offset && `offset-${offset}`,
+        xl && `col-xl-${xl}`,
+        lg && `col-lg-${lg}`,
+        md && `col-md-${md}`,
+        sm && `col-sm-${sm}`,
+        xs && `col-xs-${xs}`
+      ];
     }
   }
 };
