@@ -365,7 +365,20 @@ https://stackoverflow.com/questions/57557941/why-vue-js-computed-get-undefined
 
 
 
+##### 关于gutter
 
+这里有个场景很有趣，父组件Row.col,需要一个prop叫gutter，同时这个prop也会影响到Col.vue,可是Raw.col使用的是slot的形式，没法使用prop再传递一级，所以这里使用了$children
+```
+  // Raw.vue
+  mounted(){
+    this.$children.forEach(vm=>{
+      // 妙就秒在这里，用这样的方式改变子组件的data,当然，组件其实就是Vue实例
+      vm.gutter = this.gutter;
+    })
+  }
+
+
+```
 
 
 
