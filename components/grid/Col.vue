@@ -13,6 +13,21 @@ export default {
     },
     offset: {
       type: [Number, String]
+    },
+    xl: {
+      type: [Number, String]
+    },
+    lg: {
+      type: [Number, String]
+    },
+    md: {
+      type: [Number, String]
+    },
+    sm: {
+      type: [Number, String]
+    },
+    xs: {
+      type: [Number, String]
     }
   },
   data() {
@@ -36,34 +51,35 @@ export default {
         paddingRight: this.calcGutter
       };
     },
-    colClasses(){
-      let {span,offset} = this
-      return [span && `col-${span}`,offset && `offset-${offset}`]
+    colClasses() {
+      let { span, offset, xl, lg, md, sm, xs } = this;
+      return [span && `col-${span}`, offset && `offset-${offset}`,xl && `col-xl-${xl}`,lg && `col-lg-${lg}`,md && `col-md-${md}`,sm && `col-sm-${sm}`,xs && `col-xs-${xs}`];
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-// @xs:~"only screen and (max-width:576px)";
-// @sm:~"only screen and (max-width:768px)";
-// @md:~"only screen and (max-width:992px)";
-// @lg:~"only screen and (max-width:1200px)";
-// @xl:~"only screen and (max-width:1600px)";
+@xs:~"only screen and (max-width:576px)";
+@sm:~"only screen and (max-width:768px)";
+@md:~"only screen and (max-width:992px)";
+@lg:~"only screen and (max-width:1200px)";
+@xl:~"only screen and (max-width:1600px)";
 
-// @cols:24;
+@cols:24;
 
-// .generateResponsiveCols(@counter,@media)when(@counter>0){
-//   @width:(@counter / @cols) * 100;
+.generateResponsiveCols(@counter,@media)when(@counter>0){
+  @width:(@counter / @cols) * 100;
 
-//   .col-@{media}-@{counter}{
-//     flex-basis: ~"@{width}%";
-//     max-width:~"@{width}%"
-//   }
+  .col.col-@{media}-@{counter}{
+    flex-basis: ~"@{width}%";
+    max-width:~"@{width}%"
+    // width:~"@{width}%"
+  }
 
-//   .generateResponsiveCols((@counter-1), @media)
+  .generateResponsiveCols((@counter - 1), @media)
 
-// };
+};
 
 
   .col{
@@ -89,8 +105,20 @@ export default {
         width:percentage(@value / 24);
       }
     });
-    // @media @xs {
-    //   .generateResponsiveCols(@cols, xs)
-    // }
   }
+    @media @xl {
+      .generateResponsiveCols(@cols, xl)
+    }
+    @media @lg {
+      .generateResponsiveCols(@cols, lg)
+    }
+    @media @md {
+      .generateResponsiveCols(@cols, md)
+    }
+    @media @sm {
+      .generateResponsiveCols(@cols, sm)
+    }
+    @media @xs {
+      .generateResponsiveCols(@cols, xs)
+    }
 </style>
