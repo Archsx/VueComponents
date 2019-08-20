@@ -18,10 +18,6 @@ export default {
   data() {
     return {
       gutter: 0
-      // styleObj: {
-      //   paddingLeft: this.realGutter,
-      //   paddingRight: this.realGutter
-      // }
     };
   },
   computed: {
@@ -49,6 +45,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// @xs:~"only screen and (max-width:576px)";
+// @sm:~"only screen and (max-width:768px)";
+// @md:~"only screen and (max-width:992px)";
+// @lg:~"only screen and (max-width:1200px)";
+// @xl:~"only screen and (max-width:1600px)";
+
+// @cols:24;
+
+// .generateResponsiveCols(@counter,@media)when(@counter>0){
+//   @width:(@counter / @cols) * 100;
+
+//   .col-@{media}-@{counter}{
+//     flex-basis: ~"@{width}%";
+//     max-width:~"@{width}%"
+//   }
+
+//   .generateResponsiveCols((@counter-1), @media)
+
+// };
+
 
   .col{
     border: 1px solid red;
@@ -73,5 +89,8 @@ export default {
         width:percentage(@value / 24);
       }
     });
+    // @media @xs {
+    //   .generateResponsiveCols(@cols, xs)
+    // }
   }
 </style>
