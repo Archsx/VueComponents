@@ -80,14 +80,17 @@ export default {
       let { span, offset, phone, iPad, narrowPc, pc, widePc } = this;
       let classSet = [];
       let obj = { phone, iPad, narrowPc, pc, widePc };
+      console.log(obj);
       Object.keys(obj).forEach(ele => {
-        let span = obj[ele].span;
-        let offset = obj[ele].offset;
-        if (span) {
-          classSet.push(`col-${ele}-${span}`);
-        }
-        if (offset) {
-          classSet.push(`offset-${ele}-${offset}`);
+        if (obj[ele]) {
+          let span = obj[ele].span;
+          let offset = obj[ele].offset;
+          if (span) {
+            classSet.push(`col-${ele}-${span}`);
+          }
+          if (offset) {
+            classSet.push(`offset-${ele}-${offset}`);
+          }
         }
       });
       return [span && `col-${span}`, offset && `offset-${offset}`, ...classSet];
@@ -126,7 +129,7 @@ export default {
       }
     });
     }
-    @media (min-width:577px) and (max-width:768px){
+    @media (min-width:577px){
 
     each(range(24),{
       &.col-ipad-@{value}{
@@ -139,7 +142,7 @@ export default {
       }
     });
     }
-    @media (min-width:769px) and (max-width:992px){
+    @media (min-width:769px){
 
     each(range(24),{
       &.col-narrow-pc-@{value}{
@@ -152,7 +155,7 @@ export default {
       }
     });
     }
-    @media (min-width:993px) and (max-width:1200px){
+    @media (min-width:993px) {
 
     each(range(24),{
       &.col-pc-@{value}{
