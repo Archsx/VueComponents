@@ -6,6 +6,11 @@
 </template>
 
 <script>
+let validator = value => {
+  return Object.keys(value).every(ele => {
+    return ["span", "offset"].includes(ele);
+  });
+};
 export default {
   props: {
     span: {
@@ -31,11 +36,23 @@ export default {
     // }
     phone: {
       type: Object,
-      validator(value) {
-        return Object.keys(value).every(ele => {
-          return ["span", "offset"].includes(ele);
-        });
-      }
+      validator
+    },
+    iPad: {
+      type: Object,
+      validator
+    },
+    narrowPc: {
+      type: Object,
+      validator
+    },
+    pc: {
+      type: Object,
+      validator
+    },
+    widePc: {
+      type: Object,
+      validator
     }
   },
   data() {
@@ -60,81 +77,108 @@ export default {
       };
     },
     colClasses() {
-      let { span, offset, xl, lg, md, sm, xs } = this;
-      return [
-        span && `col-${span}`,
-        offset && `offset-${offset}`,
-        xl && `col-xl-${xl}`,
-        lg && `col-lg-${lg}`,
-        md && `col-md-${md}`,
-        sm && `col-sm-${sm}`,
-        xs && `col-xs-${xs}`
-      ];
+      let { span, offset, phone, iPad, narrowPc, pc, widePc } = this;
+      let classSet = [];
+      let obj = { phone, iPad, narrowPc, pc, widePc };
+      Object.keys(obj).forEach(ele => {
+        let span = obj[ele].span;
+        let offset = obj[ele].offset;
+        if (span) {
+          classSet.push(`col-${ele}-${span}`);
+        }
+        if (offset) {
+          classSet.push(`offset-${ele}-${offset}`);
+        }
+      });
+      return [span && `col-${span}`, offset && `offset-${offset}`, ...classSet];
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-@xs:~"only screen and (max-width:576px)";
-@sm:~"only screen and (max-width:768px)";
-@md:~"only screen and (max-width:992px)";
-@lg:~"only screen and (max-width:1200px)";
-@xl:~"only screen and (max-width:1600px)";
-
-@cols:24;
-
-.generateResponsiveCols(@counter,@media)when(@counter>0){
-  @width:(@counter / @cols) * 100;
-
-  .col.col-@{media}-@{counter}{
-    flex-basis: ~"@{width}%";
-    max-width:~"@{width}%"
-    // width:~"@{width}%"
-  }
-
-  .generateResponsiveCols((@counter - 1), @media)
-
-};
-
 
   .col{
     border: 1px solid red;
     height: 50px;
     background: grey;
     background-clip: content-box;
-    // flex-grow: 1
     each(range(24),{
-      // &[span="@{value}"]{
-      //   width:percentage(@value / 24);
-      // }
       &.col-@{value}{
         width:percentage(@value / 24);
       }
     });
     each(range(24),{
-      // &[offset="@{value}"]{
-      //   // margin-right:percentage(@value /24)
-      //   margin-right: (@value / 24) * 100%
-      // }
       &.offset-@{value}{
         width:percentage(@value / 24);
       }
     });
+    @media (max-width:576px){
+
+    each(range(24),{
+      &.col-phone-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    each(range(24),{
+      &.offset-phone-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    }
+    @media (min-width:577px) and (max-width:768px){
+
+    each(range(24),{
+      &.col-ipad-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    each(range(24),{
+      &.offset-ipad-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    }
+    @media (min-width:769px) and (max-width:992px){
+
+    each(range(24),{
+      &.col-narrow-pc-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    each(range(24),{
+      &.offset-narrow-pc-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    }
+    @media (min-width:993px) and (max-width:1200px){
+
+    each(range(24),{
+      &.col-pc-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    each(range(24),{
+      &.offset-pc-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    }
+    @media (min-width:1201px){
+
+    each(range(24),{
+      &.col-wide-pc-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    each(range(24),{
+      &.offset-wide-pc-@{value}{
+        width:percentage(@value / 24);
+      }
+    });
+    }
+
   }
-    @media @xl {
-      .generateResponsiveCols(@cols, xl)
-    }
-    @media @lg {
-      .generateResponsiveCols(@cols, lg)
-    }
-    @media @md {
-      .generateResponsiveCols(@cols, md)
-    }
-    @media @sm {
-      .generateResponsiveCols(@cols, sm)
-    }
-    @media @xs {
-      .generateResponsiveCols(@cols, xs)
-    }
+
 </style>
