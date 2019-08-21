@@ -380,6 +380,21 @@ https://stackoverflow.com/questions/57557941/why-vue-js-computed-get-undefined
 
 ```
 
+##### 关于media query
+
+```
+    // 以前只会
+    @media and screen (max-width:768px){
+
+    }
+
+    // 还可以这样限定区间
+    @media (min-width:577px) and (max-width:768px){
+
+    }
+
+```
+
 
 
 
