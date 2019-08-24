@@ -19,14 +19,8 @@ new Vue({
   el:'#app',
   data() {
     return {
-      siderStyle:{
-        width:'200px'
-      }
     }
   },
   methods: {
-    toggleHide(){
-      this.siderStyle.width = this.siderStyle.width === '200px'? '40px':'200px'
-    }
   },
 })

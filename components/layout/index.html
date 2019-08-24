@@ -18,10 +18,11 @@
 
       .sider {
         background: #333;
-        width: 200px;
-        transition: width 0.2s linear;
-        transition-delay:0.3s;
-        overflow: hidden;
+        width: 150px;
+      }
+      .sider.slide-enter,
+      .sider.slide-leave-to {
+        margin-left: -150px !important;
       }
       .header {
         background: #999;
@@ -30,11 +31,6 @@
       .footer {
         background: #ccc;
         height: 50px;
-      }
-      .sider > button{
-        position: absolute;
-        top:0;
-        right: 0;
       }
     </style>
   </head>
@@ -62,7 +58,6 @@
         <g-footer class="demo">footer</g-footer> -->
         <g-sider :style="siderStyle">
           sider
-          <button @click="toggleHide">close</button>
         </g-sider>
         <g-layout>
           <g-header>header</g-header>
