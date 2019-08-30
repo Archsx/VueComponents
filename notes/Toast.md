@@ -123,15 +123,14 @@
   
 
 
-
-
-
-
-
-
-
 ```
 
+
+##### mounted与getBoundingClientRect()
+
+
+讲道理的说，在Vue的mounted生命周期里面是能拿到DOM的长宽高等信息的，但是这里的有点特别，这里的instance一开始并没有el这个属性，所以在它.$mount的时候，就已经执行了mounted钩子函数了，
+这个时候还没等document.body.appendChild(vm.$el),所以这个时候使用someDOM.getBoundingClientgRect()并不能拿到正确的值，这时候需要配合$nextTick使用
 
 
 
