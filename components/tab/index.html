@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+  
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <g-tab :selected.sync="selectedTab">
+    <!-- <g-tab selected="selectedTab" @update:selected="selectedTab = $event"> -->
+      <g-tab-head>
+        <template v-slot:actions>
+          <button >设置</button>
+        </template>
+        <g-tab-item name="sports">体育</g-tab-item>
+        <g-tab-item name="economy" disabled>财经</g-tab-item>
+        <g-tab-item name="universal">国际</g-tab-item>
+      </g-tab-head>
+      <g-tab-body>
+        <g-tab-pane name="sports">詹姆斯宣布加盟湖人</g-tab-pane>
+        <g-tab-pane name="economy">美联储宣布降息</g-tab-pane>
+        <g-tab-pane name="universal">中美贸易战升级</g-tab-pane>
+      </g-tab-body>
+    </->
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
