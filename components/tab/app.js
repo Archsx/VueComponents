@@ -4,17 +4,22 @@ import TabBody from "./TabBody.vue";
 import TabPane from './TabPane.vue'
 import TabHead from './TabHead.vue'
 import TabItem from './TabItem.vue'
-Vue.component('g-tab',Tab)
-Vue.component('g-tab-body',TabBody)
-Vue.component('g-tab-pane',TabPane)
-Vue.component('g-tab-head',TabHead)
-Vue.component('g-tab-item',TabItem)
+Vue.component('g-tab', Tab)
+Vue.component('g-tab-body', TabBody)
+Vue.component('g-tab-pane', TabPane)
+Vue.component('g-tab-head', TabHead)
+Vue.component('g-tab-item', TabItem)
 
 new Vue({
-  el:'#app',
+  el: '#app',
   data() {
     return {
-      selectedTab:'sports'
+      selectedTab: 'sports'
+    }
+  },
+  methods: {
+    yyy(value) {
+      console.log(this.selectedTab)
     }
   },
 })
