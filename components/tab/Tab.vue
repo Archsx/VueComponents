@@ -31,13 +31,23 @@ export default {
     };
   },
   created() {
-      // this.$emit("update:selected", "foo");
+    // this.$emit("update:selected", "foo");
   },
-  methods: {
-  },
+  methods: {},
   mounted() {
-    this.eventBus.$emit('update:selected',this.selected)
-  },
+    this.$children.forEach(vm => {
+      if (vm.$options.name === "GTabHead") {
+        vm.$children.forEach(item => {
+          if (
+            item.$options.name === "GTabItem" &&
+            item.name === this.selected
+          ) {
+              this.eventBus.$emit("update:selected", this.selected, item);
+          }
+        });
+      }
+    });
+  }
 };
 </script>
 

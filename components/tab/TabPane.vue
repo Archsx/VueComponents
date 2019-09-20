@@ -31,10 +31,10 @@ export default {
 
 <style lang="less" scoped>
   .tab-pane{
-
+    padding: 1em;
 
     &.active{
-      background: red
+      // background: red
     }
   }
 </style>
