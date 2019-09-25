@@ -35,6 +35,10 @@ export default {
   },
   methods: {},
   mounted() {
+    // if(this.$children.length === 0){
+    //   //$children只能获取到子组件，而不是普通的HTML元素(div之类的)
+    //   throw new Error('tabs没有子组件')
+    // }
     this.$children.forEach(vm => {
       if (vm.$options.name === "GTabHead") {
         vm.$children.forEach(item => {

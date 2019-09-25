@@ -62,7 +62,8 @@ export default {
       font-weight: bold;
     }
     &.disabled{
-      color: @disabled-text-color
+      color: @disabled-text-color;
+      cursor:not-allowed;
     }
   }
 </style>
